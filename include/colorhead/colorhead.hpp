@@ -8,7 +8,7 @@ namespace clrhd
 
 inline std::string add_reset(std::string str)
 {
-    if (str.size() > 4 && std::string_view(str.data() + str.size()-4) != "\033[0m") {
+    if (str.size() > 4 && std::string_view(str.data() + str.size()-4, 4) != "\033[0m") {
         str += "\033[0m";
     }
 
