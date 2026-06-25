@@ -28,12 +28,12 @@ std::string color_bg_rgb(std::string str, int r, int g, int b)
 
 std::string decorate_text(std::string str)
 {
-    return str;
+    return std::move(str) + "\033[0m";
 }
 template<typename... Args>
 std::string decorate_text(std::string str, TextDecoration decoration, Args&&... decorations)
 {
-    return decorate_text("\033[" + std::to_string(static_cast<int>(decoration)) + "m" + std::move(str) + "\033[0m", decorations...);
+    return decorate_text("\033[" + std::to_string(static_cast<int>(decoration)) + "m" + std::move(str), decorations...);
 }
 
 }
