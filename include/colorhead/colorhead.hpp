@@ -6,7 +6,14 @@
 namespace clrhd
 {
 
-std::string add_reset(std::string str);
+inline std::string add_reset(std::string str)
+{
+    if (str.size() > 4 && std::string_view(str.data() + str.size()-4) != "\033[0m") {
+        str += "\033[0m";
+    }
+
+    return std::move(str);
+}
 
 inline std::string color_text_old(std::string str, int clr_num) // color text in console built-in color (0-255). Sense - weights 9-11 bytes, when rgb weights 14-17 bytes
 {
