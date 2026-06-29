@@ -10,14 +10,17 @@ add_library(colorhead STATIC
 
 target_include_directories(colorhead PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:$:include>
+    $<INSTALL_INTERFACE:include>
 )
+
+add_library(clrhd::colorhead ALIAS colorhead)
 
 include(CMakePackageConfigHelpers)
 
 install(TARGETS colorhead
     EXPORT colorheadTargets
-    ARCHIVE DESTINATION lib    
+    ARCHIVE DESTINATION lib
+    INCLUDES DESTINATION include    
 )
 
 install(EXPORT colorheadTargets
@@ -28,9 +31,9 @@ install(EXPORT colorheadTargets
 
 install(DIRECTORY include/ DESTINATION include)
 
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/colorheadConfig.cmake" "
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/colorheadConfig.cmake" [[
 include(CMakeFindDependencyMacro)
-include(\"\${CMAKE_CURRENT_LIST_DIR}/colorheadTargets.cmake\")
-")
+include("${CMAKE_CURRENT_LIST_DIR}/colorheadTargets.cmake")
+]])
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/colorheadConfig.cmake" DESTINATION lib/cmake/colorhead)
