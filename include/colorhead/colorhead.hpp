@@ -2,6 +2,7 @@
 
 #include "colorhead/text_decoration.hpp"
 #include "colorhead/consts.hpp"
+#include "colorhead/debug.hpp"
 #include <string>
 #include <iostream>
 

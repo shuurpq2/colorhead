@@ -8,12 +8,15 @@ add_library(colorhead STATIC
     src/colorhead.cpp
 )
 
+target_compile_definitions(colorhead PUBLIC $<$<CONFIG:Debug>:CLRHD_DEBUG>)
+set_target_properties(colorhead PROPERTIES DEBUG_POSTFIX d)
+
 target_include_directories(colorhead PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-add_library(clrhd::colorhead ALIAS colorhead)
+# add_library(clrhd::colorhead ALIAS colorhead)
 
 include(CMakePackageConfigHelpers)
 
